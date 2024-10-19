@@ -1,9 +1,6 @@
 package modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 /**
  * A classe Pessoa representa uma entidade de pessoa com atributos nome, telefone e email.
@@ -19,8 +16,12 @@ public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false,unique = true,length = 11)
+    private String cpf;
+    @Column(nullable = false)
     private String nome;
     private String telefone;
+    @Column(nullable = false,unique = true)
     private String email;
 
     /**
@@ -30,7 +31,8 @@ public class Pessoa {
      * @param telefone o telefone da pessoa
      * @param email o email da pessoa
      */
-    public Pessoa(String nome, String telefone, String email) {
+    public Pessoa(String cpf, String nome, String telefone, String email) {
+        this.cpf = cpf;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
@@ -57,6 +59,14 @@ public class Pessoa {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     /**
